@@ -83,7 +83,7 @@ const CartScreen = () => {
       'Delivery Address',
       deliveryAddress,
       [
-        { text: 'Cancel', onPress: () => navigation.navigate('Address'), style: 'cancel' },
+        { text: 'Edit', onPress: () => navigation.navigate('Address'), style: 'cancel' },
         { text: 'Continue', onPress: checkout },
       ]
     );
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFBFE',
   },
   header: {
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     padding: 14,
     paddingTop: 28,
     flexDirection: 'row',
@@ -370,7 +370,7 @@ const styles = StyleSheet.create({
   browseButton: {
     padding: 10,
     paddingHorizontal: 24,
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     borderRadius: 0,
     elevation: 2,
     shadowColor: '#000',
@@ -558,7 +558,7 @@ const styles = StyleSheet.create({
   checkoutButton: {
     width: '100%',
     paddingVertical: 16,
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 12,
