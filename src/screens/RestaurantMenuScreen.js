@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  FlatList,
   ScrollView,
   Image,
   ActivityIndicator,
@@ -34,6 +35,15 @@ const RestaurantMenuScreen = () => {
     loadMenuItems();
   }, [restaurantId]);
 
+  const [selectedCategory, setSelectedCategory] = useState("1");
+
+  const categories = [
+    { id: "1", name: "Drinks" },
+    { id: "2", name: "Swallow" },
+    { id: "3", name: "Street Food" },
+    { id: "4", name: "Desserts" },
+    { id: "5", name: "Snacks" },
+  ];
   const loadRestaurantInfo = async () => {
     let restaurant = route.params?.restaurant;
     
@@ -195,6 +205,35 @@ const RestaurantMenuScreen = () => {
           {restaurantAddress && <Text style={styles.headerSubtitle}>{restaurantAddress}</Text>}
         </View>
       </View>
+
+      <View style={{paddingVertical:15}}>
+        <FlatList
+            data={categories}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{ paddingHorizontal: 10 }}
+            renderItem={({ item }) => (
+                <TouchableOpacity
+                    style={[
+                      styles.categoryBox,
+                      selectedCategory === item.id && styles.selectedCategory,
+                    ]}
+                    onPress={() => setSelectedCategory(item.id)}
+                >
+                  <Text
+                      style={[
+                        styles.categoryText,
+                        selectedCategory === item.id && styles.selectedText,
+                      ]}
+                  >
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+            )}
+        />
+
+      </View>
       
       <ScrollView style={styles.scrollView} contentContainerStyle={[styles.scrollContent, { paddingBottom: 16 + insets.bottom }]}>
         {items.map((item) => (
@@ -253,8 +292,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFBFE',
   },
+  categoryBox: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: "#f2f2f2",
+    borderRadius: 10,
+    marginRight: 10,
+  },
+  selectedCategory: {
+    backgroundColor: "#EF712E",
+  },
+  categoryText: {
+    fontSize: 16,
+    color: "#333",
+  },
+  selectedText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  content: {
+    marginTop: 50,
+    alignItems: "center",
+  },
+  contentText: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
   header: {
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     padding: 14,
     paddingTop: 28,
     flexDirection: 'row',
@@ -330,7 +395,7 @@ const styles = StyleSheet.create({
   retryButton: {
     padding: 10,
     paddingHorizontal: 24,
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     borderRadius: 0,
   },
   retryButtonText: {
@@ -425,7 +490,7 @@ const styles = StyleSheet.create({
   addButton: {
     width: '100%',
     padding: 10,
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 40,
