@@ -24,6 +24,7 @@ const RestaurantMenuScreen = () => {
   const dispatch = useDispatch();
   const insets = useSafeAreaInsets();
   const [items, setItems] = useState([]);
+  const [sortItems, setSortItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [restaurantName, setRestaurantName] = useState('');
@@ -35,14 +36,17 @@ const RestaurantMenuScreen = () => {
     loadMenuItems();
   }, [restaurantId]);
 
-  const [selectedCategory, setSelectedCategory] = useState("1");
+  const [selectedCategory, setSelectedCategory] = useState("0");
 
   const categories = [
-    { id: "1", name: "Drinks" },
-    { id: "2", name: "Swallow" },
-    { id: "3", name: "Street Food" },
-    { id: "4", name: "Desserts" },
-    { id: "5", name: "Snacks" },
+    { id: "0", name: "Main Menu" },
+    { id: "1", name: "Starters" },
+    { id: "2", name: "Beans and Rice Meal" },
+    { id: "4", name: "Soup and Swallow" },
+    { id: "5", name: "Grilled" },
+    { id: "6", name: "Yam and Special Meal" },
+    { id: "7", name: "Meat and Fish Meal" },
+    { id: "8", name: "Non Alcoholic Drinks" },
   ];
   const loadRestaurantInfo = async () => {
     let restaurant = route.params?.restaurant;
@@ -69,6 +73,17 @@ const RestaurantMenuScreen = () => {
       fetchRestaurantFromList();
     }
   };
+
+  function filterItems(category){
+    setSelectedCategory(category)
+    // all items
+    if(category == 0){
+      setSortItems(items || []);
+    }else{
+      let holder = items.filter(item => item.category == category);
+      setSortItems(holder || []);
+    }
+  }
 
   const fetchRestaurantFromList = async () => {
     try {
@@ -102,6 +117,7 @@ const RestaurantMenuScreen = () => {
       
       const data = await dispatch(fetchRestaurantItems(restaurantId)).unwrap();
       setItems(data || []);
+      setSortItems(items);
     } catch (error) {
       const errorMessage = typeof error === 'string' ? error : error?.message || 'Failed to load menu items. Please try again.';
       Alert.alert('Load Menu Failed', errorMessage);
@@ -219,14 +235,9 @@ const RestaurantMenuScreen = () => {
                       styles.categoryBox,
                       selectedCategory === item.id && styles.selectedCategory,
                     ]}
-                    onPress={() => setSelectedCategory(item.id)}
+                    onPress={() => filterItems(item.id)}
                 >
-                  <Text
-                      style={[
-                        styles.categoryText,
-                        selectedCategory === item.id && styles.selectedText,
-                      ]}
-                  >
+                  <Text style={[styles.categoryText, selectedCategory === item.id && styles.selectedText]}>
                     {item.name}
                   </Text>
                 </TouchableOpacity>
@@ -236,7 +247,7 @@ const RestaurantMenuScreen = () => {
       </View>
       
       <ScrollView style={styles.scrollView} contentContainerStyle={[styles.scrollContent, { paddingBottom: 16 + insets.bottom }]}>
-        {items.map((item) => (
+        {sortItems.map((item) => (
           <View
             key={item.id}
             style={[styles.menuItemCard, !item.inStock && styles.outOfStock]}
@@ -304,7 +315,7 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     fontSize: 16,
-    color: "#333",
+    color: "#776e6e",
   },
   selectedText: {
     color: "#fff",
