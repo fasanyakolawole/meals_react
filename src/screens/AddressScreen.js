@@ -184,7 +184,7 @@ const AddressScreen = () => {
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>My Delivery Details</Text>
-          <Text style={styles.headerSubtitle}>Please provide your delivery address to continue</Text>
+          <Text style={styles.headerSubtitle}>Please provide your delivery details</Text>
         </View>
       </View>
 
