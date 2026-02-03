@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFBFE',
   },
   header: {
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     padding: 14,
     paddingTop: 28,
     flexDirection: 'row',
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
   retryButton: {
     padding: 10,
     paddingHorizontal: 24,
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     borderRadius: 0,
   },
   retryButtonText: {
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 12,
     right: 12,
-    backgroundColor: '#10b981',
+    backgroundColor: '#EF712E',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 0,
