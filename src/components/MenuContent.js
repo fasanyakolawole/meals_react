@@ -37,10 +37,10 @@ const MenuContent = () => {
         <Text style={styles.menuItemText}>My Orders</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.menuItem} onPress={customAlert}>
-        <Text style={styles.menuItemIcon}>💬</Text>
-        <Text style={styles.menuItemText}>Contact Us</Text>
-      </TouchableOpacity>
+      {/*<TouchableOpacity style={styles.menuItem} onPress={customAlert}>*/}
+      {/*  <Text style={styles.menuItemIcon}>💬</Text>*/}
+      {/*  <Text style={styles.menuItemText}>Contact Us</Text>*/}
+      {/*</TouchableOpacity>*/}
       
       <View style={styles.menuDivider} />
 

@@ -1,61 +1,79 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal, TouchableOpacity, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  TouchableOpacity,
+  Animated,
+} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectIsDrawerOpen } from '../store/slices/drawerSlice';
-import { closeDrawer } from '../store/slices/drawerSlice';
+import { selectIsDrawerOpen, closeDrawer } from '../store/slices/drawerSlice';
 import MenuContent from './MenuContent';
+
+const CLOSED_X = -300;
+const ANIMATION_DURATION = 250;
 
 const SlideDrawer = ({ title = 'Menu' }) => {
   const isOpen = useSelector(selectIsDrawerOpen);
   const dispatch = useDispatch();
-  const slideAnim = React.useRef(new Animated.Value(-300)).current;
+
+  const [isVisible, setIsVisible] = React.useState(false);
+  const slideAnim = React.useRef(new Animated.Value(CLOSED_X)).current;
 
   React.useEffect(() => {
     if (isOpen) {
+      // mount modal first
+      setIsVisible(true);
+
       Animated.timing(slideAnim, {
         toValue: 0,
-        duration: 250,
+        duration: ANIMATION_DURATION,
         useNativeDriver: true,
       }).start();
-    } else {
+    } else if (isVisible) {
+      // slide out, then unmount
       Animated.timing(slideAnim, {
-        toValue: -300,
-        duration: 250,
+        toValue: CLOSED_X,
+        duration: ANIMATION_DURATION,
         useNativeDriver: true,
-      }).start();
+      }).start(() => {
+        setIsVisible(false);
+      });
     }
-  }, [isOpen]);
+  }, [isOpen, isVisible, slideAnim]);
+
+  if (!isVisible) return null;
 
   return (
-    <Modal
-      visible={isOpen}
-      transparent
-      animationType="none"
-      onRequestClose={() => dispatch(closeDrawer())}
-    >
-      <TouchableOpacity
-        style={styles.overlay}
-        activeOpacity={1}
-        onPress={() => dispatch(closeDrawer())}
+      <Modal
+          visible
+          transparent
+          animationType="none"
+          onRequestClose={() => dispatch(closeDrawer())}
       >
-        <Animated.View
-          style={[
-            styles.drawer,
-            {
-              transform: [{ translateX: slideAnim }],
-            },
-          ]}
+        <TouchableOpacity
+            style={styles.overlay}
+            activeOpacity={1}
+            onPress={() => dispatch(closeDrawer())}
         >
-          <View style={styles.drawerHeader}>
-            <Text style={styles.drawerTitle}>{title}</Text>
-            <TouchableOpacity onPress={() => dispatch(closeDrawer())}>
-              <Text style={styles.closeButton}>✕</Text>
-            </TouchableOpacity>
-          </View>
-          <MenuContent />
-        </Animated.View>
-      </TouchableOpacity>
-    </Modal>
+          <Animated.View
+              style={[
+                styles.drawer,
+                { transform: [{ translateX: slideAnim }] },
+              ]}
+          >
+            <View style={styles.drawerHeader}>
+              <Text style={styles.drawerTitle}>{title}</Text>
+              <TouchableOpacity onPress={() => dispatch(closeDrawer())}>
+                <Text style={styles.closeButton}>✕</Text>
+              </TouchableOpacity>
+            </View>
+
+            <MenuContent />
+          </Animated.View>
+        </TouchableOpacity>
+      </Modal>
   );
 };
 
