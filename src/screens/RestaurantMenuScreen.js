@@ -117,7 +117,7 @@ const RestaurantMenuScreen = () => {
       
       const data = await dispatch(fetchRestaurantItems(restaurantId)).unwrap();
       setItems(data || []);
-      setSortItems(items);
+      setSortItems(data || []);
     } catch (error) {
       const errorMessage = typeof error === 'string' ? error : error?.message || 'Failed to load menu items. Please try again.';
       Alert.alert('Load Menu Failed', errorMessage);

@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   header: {
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     padding: 14,
     paddingTop: 28,
     gap: 24,
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     padding: 10,
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 40,
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   toggleLink: {
-    color: '#388E3C',
+    color: '#EF712E',
     fontSize: 14,
     fontWeight: '500',
     textTransform: 'uppercase',
