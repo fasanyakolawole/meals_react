@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFBFE',
   },
   header: {
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     padding: 14,
     paddingTop: 28,
     flexDirection: 'row',
@@ -415,7 +415,7 @@ const styles = StyleSheet.create({
   submitButton: {
     width: '100%',
     padding: 10,
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 40,
@@ -427,7 +427,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   buttonDisabled: {
-    backgroundColor: 'rgba(0, 0, 0, 0.12)',
+    backgroundColor: '#ecbaa0',
   },
   submitButtonText: {
     color: '#FFFFFF',

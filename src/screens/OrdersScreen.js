@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFBFE',
   },
   header: {
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     padding: 14,
     paddingTop: 28,
     flexDirection: 'row',
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
   browseButton: {
     padding: 10,
     paddingHorizontal: 24,
-    backgroundColor: '#388E3C',
+    backgroundColor: '#EF712E',
     borderRadius: 0,
     elevation: 2,
     shadowColor: '#000',
